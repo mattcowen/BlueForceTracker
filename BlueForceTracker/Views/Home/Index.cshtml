@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="row" style="padding:20px;">
+        <div id="myMap" class="col-md-1" style="position:relative;width:600px;height:400px;"></div>
+        <div id="buttons" class="col-md-2">
+            <button id="addTrack1">Add Track 1</button>
+            <button id="addTrack2">Add Track 2</button>
+            <ul id="trackMessages" style="list-style: none; padding:0; margin-top: 30px; width:500px">
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<!-- Reference to the Bing Maps SDK -->
+<script type='text/javascript'
+        src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&setMkt=en-GB'
+        async defer></script>
+
+
+<script type='text/javascript'>
+    var map;
+    var userPin = {};
+    var count = 0;
+    $(document).ready(function () {
+        $("#addTrack1").click(function (e) { 
+            trackPilot("Greg Smith", "gsmith", $(this));
+        });
+        $("#addTrack2").click(function (e) {
+            trackPilot("John Doe", "jdoe", $(this));
+        });
+    });
+
+
+    async function GetMap() {
+        let connection = new signalR.HubConnection('/gps');
+
+        map = new Microsoft.Maps.Map('#myMap', {
+            credentials: '@ViewData["MapKey"]',
+            mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+            zoom: 10
+        });
+        
+        recenterAfter = 0;
+
+        connection.on('send', track => {
+            console.log(track);
+
+            var pilot = track.split("&")[0];
+            recenterAfter++;
+            var latestLoc = new Microsoft.Maps.Location(track.split("&")[1], track.split("&")[2]);
+            if (!userPin[pilot]) {
+                userPin[pilot] = new Microsoft.Maps.Pushpin(latestLoc, { visible: true, color: getColour(pilot) });
+                map.entities.push(userPin[pilot]);
+                map.setView({
+                    center: latestLoc,
+                    zoom: 15
+                });
+                return;
+            }
+
+            userPin[pilot].data = track.split("&");
+            userPin[pilot].setLocation(latestLoc);
+            
+        });
+
+        connection.start(); 
+
+    }
+
+    function getColour(pilot) { 
+        if (pilot == "John Doe")
+            return 'red';
+
+        return 'blue';
+    }
+
+    function trackPilot(pilotName, shortName, element) {
+        if (userPin[pilotName]) {
+            alert("Already tracking pilot");
+            map.setView({
+                center: userPin[pilotName].getLocation(),
+                zoom: 15
+            });
+            return;
+        }
+        // call the server to copy the track log to storage
+        $.get("/api/track/" + shortName, "", function (data, status, jqXhr) { $("#trackMessages").append("<li>Track for " + data + " added</li>"); });
+        element.attr("disabled", "disabled");
+
+    }
+
+</script>
+    }
