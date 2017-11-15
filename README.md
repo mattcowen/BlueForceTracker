@@ -6,6 +6,6 @@
 
 <p>Shows how to use the new SignalR for ASP.NET Core 2.</p>
 
-<p>Update the appsettings.json with your Bing Maps key and Azure storage connection string</p>
+<p>Update the appsettings.json files with your Bing Maps key and Azure storage connection string</p>
 
 <p><a href="http://www.mattcowen.co.uk/single-post/2017/11/14/SignalR-in-ASPNET-Core-2">Read more here</a>
