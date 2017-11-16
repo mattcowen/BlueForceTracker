@@ -1,0 +1,45 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sites_GpsSpoofer_name": {
+      "value": "GpsSpoofer2"
+    },
+    "sites_BlueForceTrackerWeb_name": {
+      "value": "RedForceTracker"
+    },
+    "components_GpsSpoofer_name": {
+      "value": "GpsSpoofer2"
+    },
+    "serverfarms_GpsSpooferPlan_name": {
+      "value": "GpsSpoofer2Plan"
+    },
+    "config_web_name": {
+      "value": "web"
+    },
+    "storageAccounts_bftstorage_name": {
+      "value": "rftstorage"
+    },
+    "components_BlueForceTrackerWeb_name": {
+      "value": "RedForceTrackerWeb"
+    },
+    "serverfarms_BlueForceTrackerWebPlan_name": {
+      "value": "RedForceTrackerWebPlan"
+    },
+    "config_web_name_1": {
+      "value": "web"
+    },
+    "alertrules_Failure_Anomalies___GpsSpoofer_name": {
+      "value": "Failure Anomalies - GpsSpoofer2"
+    },
+    "alertrules_Failure_Anomalies___BlueForceTrackerWeb_name": {
+      "value": "Failure Anomalies - RedForceTrackerWeb"
+    },
+    "hostNameBindings_gpsspoofer.azurewebsites.net_name": {
+      "value": "gpsspoofer2.azurewebsites.net"
+    },
+    "hostNameBindings_blueforcetrackerweb.azurewebsites.net_name": {
+      "value": "redforcetrackerweb.azurewebsites.net"
+    }
+  }
+}

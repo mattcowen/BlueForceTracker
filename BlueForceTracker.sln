@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueForceTracker", "BlueForceTracker\BlueForceTracker.csproj", "{951C91F3-2175-46D7-B785-EFBE655D39A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GpsTrackSpoofer", "GpsTrackSpoofer\GpsTrackSpoofer.csproj", "{65AD9CA0-8362-48C6-82ED-B5DEB573B5A7}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "BftResourceGroup", "BftResourceGroup\BftResourceGroup.deployproj", "{81B7FF83-5F08-43F2-8D3E-FFA74E082D1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{65AD9CA0-8362-48C6-82ED-B5DEB573B5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65AD9CA0-8362-48C6-82ED-B5DEB573B5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65AD9CA0-8362-48C6-82ED-B5DEB573B5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B7FF83-5F08-43F2-8D3E-FFA74E082D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B7FF83-5F08-43F2-8D3E-FFA74E082D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B7FF83-5F08-43F2-8D3E-FFA74E082D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B7FF83-5F08-43F2-8D3E-FFA74E082D1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

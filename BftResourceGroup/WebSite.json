@@ -1,0 +1,490 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sites_GpsSpoofer_name": {
+      "defaultValue": "GpsSpoofer",
+      "type": "String"
+    },
+    "sites_BlueForceTrackerWeb_name": {
+      "defaultValue": "BlueForceTrackerWeb",
+      "type": "String"
+    },
+    "components_GpsSpoofer_name": {
+      "defaultValue": "GpsSpoofer",
+      "type": "String"
+    },
+    "serverfarms_GpsSpooferPlan_name": {
+      "defaultValue": "GpsSpooferPlan",
+      "type": "String"
+    },
+    "config_web_name": {
+      "defaultValue": "web",
+      "type": "String"
+    },
+    "storageAccounts_bftstorage_name": {
+      "defaultValue": "bftstorage",
+      "type": "String"
+    },
+    "components_BlueForceTrackerWeb_name": {
+      "defaultValue": "BlueForceTrackerWeb",
+      "type": "String"
+    },
+    "serverfarms_BlueForceTrackerWebPlan_name": {
+      "defaultValue": "BlueForceTrackerWebPlan",
+      "type": "String"
+    },
+    "config_web_name_1": {
+      "defaultValue": "web",
+      "type": "String"
+    },
+    "alertrules_Failure_Anomalies___GpsSpoofer_name": {
+      "defaultValue": "Failure Anomalies - GpsSpoofer",
+      "type": "String"
+    },
+    "alertrules_Failure_Anomalies___BlueForceTrackerWeb_name": {
+      "defaultValue": "Failure Anomalies - BlueForceTrackerWeb",
+      "type": "String"
+    },
+    "hostNameBindings_gpsspoofer.azurewebsites.net_name": {
+      "defaultValue": "gpsspoofer.appservice.local.azurestack.external",
+      "type": "String"
+    },
+    "hostNameBindings_blueforcetrackerweb.azurewebsites.net_name": {
+      "defaultValue": "blueforcetrackerweb.appservice.local.azurestack.external",
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/blueforcetracking/providers/Microsoft.Storage/storageAccounts/bftstorage'.",
+      "type": "Microsoft.Storage/storageAccounts",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "kind": "Storage",
+      "name": "[parameters('storageAccounts_bftstorage_name')]",
+      "apiVersion": "2016-01-01",
+      "location": "local",
+      "tags": {},
+      "scale": null,
+      "properties": {
+        "supportsHttpsTrafficOnly": false
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/serverfarms/BlueForceTrackerWebPlan'.",
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "F1",
+        "tier": "Shared",
+        "size": "F1",
+        "family": "D",
+        "capacity": 1
+      },
+      "kind": "app",
+      "name": "[parameters('serverfarms_BlueForceTrackerWebPlan_name')]",
+      "apiVersion": "2016-09-01",
+      "location": "local",
+      "scale": null,
+      "properties": {
+        "name": "[parameters('serverfarms_BlueForceTrackerWebPlan_name')]",
+        "workerTierName": null,
+        "adminSiteName": null,
+        "hostingEnvironmentProfile": null,
+        "perSiteScaling": false,
+        "reserved": false,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/serverfarms/GpsSpooferPlan'.",
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "S1",
+        "tier": "Standard",
+        "size": "S1",
+        "family": "S",
+        "capacity": 1
+      },
+      "kind": "app",
+      "name": "[parameters('serverfarms_GpsSpooferPlan_name')]",
+      "apiVersion": "2016-09-01",
+      "location": "local",
+      "scale": null,
+      "properties": {
+        "name": "[parameters('serverfarms_GpsSpooferPlan_name')]",
+        "workerTierName": null,
+        "adminSiteName": null,
+        "hostingEnvironmentProfile": null,
+        "perSiteScaling": false,
+        "reserved": false,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
+      },
+      "dependsOn": []
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/sites/GpsSpoofer'.",
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "name": "[parameters('sites_GpsSpoofer_name')]",
+      "apiVersion": "2016-08-01",
+      "location": "local",
+      "tags": {
+        "hidden-related:/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/serverfarms/GpsSpooferPlan": "empty"
+      },
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_GpsSpoofer_name'),parameters('hostNameBindings_gpsspoofer.azurewebsites.net_name'))]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('sites_GpsSpoofer_name'),parameters('hostNameBindings_gpsspoofer.azurewebsites.net_name'))]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_GpsSpooferPlan_name'))]",
+        "reserved": false,
+        "siteConfig": null,
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": true,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 1536,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_GpsSpooferPlan_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/sites/BlueForceTrackerWeb'.",
+      "type": "Microsoft.Web/sites",
+      "kind": "app",
+      "name": "[parameters('sites_BlueForceTrackerWeb_name')]",
+      "apiVersion": "2016-08-01",
+      "location": "local",
+      "tags": {
+        "hidden-related:/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/serverfarms/BlueForceTrackerWebPlan": "empty"
+      },
+      "scale": null,
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "[concat(parameters('sites_BlueForceTrackerWeb_name'),parameters('hostNameBindings_blueforcetrackerweb.azurewebsites.net_name'))]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Standard"
+          },
+          {
+            "name": "[concat(parameters('sites_BlueForceTrackerWeb_name'),parameters('hostNameBindings_blueforcetrackerweb.azurewebsites.net_name'))]",
+            "sslState": "Disabled",
+            "virtualIP": null,
+            "thumbprint": null,
+            "toUpdate": null,
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_BlueForceTrackerWebPlan_name'))]",
+        "reserved": false,
+        "siteConfig": null,
+        "scmSiteAlsoStopped": false,
+        "hostingEnvironmentProfile": null,
+        "clientAffinityEnabled": true,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "cloningInfo": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_BlueForceTrackerWebPlan_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/sites/GpsSpoofer/config/web'.",
+      "type": "Microsoft.Web/sites/config",
+      "name": "[concat(parameters('sites_GpsSpoofer_name'), '/', parameters('config_web_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "local",
+      "tags": {
+        "hidden-related:/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/serverfarms/GpsSpooferPlan": "empty"
+      },
+      "scale": null,
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "phpVersion": "5.6",
+        "pythonVersion": "",
+        "nodeVersion": "",
+        "linuxFxVersion": "",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2012",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "$GpsSpoofer",
+        "publishingPassword": null,
+        "appSettings": null,
+        "metadata": null,
+        "connectionStrings": null,
+        "machineKey": null,
+        "handlerMappings": null,
+        "documentRoot": null,
+        "scmType": "None",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": false,
+        "alwaysOn": true,
+        "javaVersion": null,
+        "javaContainer": null,
+        "javaContainerVersion": null,
+        "appCommandLine": "",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false,
+            "virtualDirectories": null
+          }
+        ],
+        "winAuthAdminState": 0,
+        "winAuthTenantState": 0,
+        "customAppPoolIdentityAdminState": false,
+        "customAppPoolIdentityTenantState": false,
+        "runtimeADUser": null,
+        "runtimeADUserPassword": null,
+        "loadBalancing": "LeastRequests",
+        "routingRules": [],
+        "experiments": {
+          "rampUpRules": []
+        },
+        "limits": null,
+        "autoHealEnabled": false,
+        "autoHealRules": {
+          "triggers": null,
+          "actions": null
+        },
+        "tracingOptions": null,
+        "vnetName": "",
+        "siteAuthEnabled": false,
+        "siteAuthSettings": {
+          "enabled": null,
+          "unauthenticatedClientAction": null,
+          "tokenStoreEnabled": null,
+          "allowedExternalRedirectUrls": null,
+          "defaultProvider": null,
+          "clientId": null,
+          "clientSecret": null,
+          "issuer": null,
+          "allowedAudiences": null,
+          "additionalLoginParams": null,
+          "isAadAutoProvisioned": false,
+          "googleClientId": null,
+          "googleClientSecret": null,
+          "googleOAuthScopes": null,
+          "facebookAppId": null,
+          "facebookAppSecret": null,
+          "facebookOAuthScopes": null,
+          "twitterConsumerKey": null,
+          "twitterConsumerSecret": null,
+          "microsoftAccountClientId": null,
+          "microsoftAccountClientSecret": null,
+          "microsoftAccountOAuthScopes": null
+        },
+        "cors": {
+          "allowedOrigins": [
+            "*"
+          ]
+        },
+        "push": null,
+        "apiDefinition": null,
+        "autoSwapSlotName": null,
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_GpsSpoofer_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/sites/GpsSpoofer/hostNameBindings/gpsspoofer.azurewebsites.net'.",
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "name": "[concat(parameters('sites_GpsSpoofer_name'), '/', parameters('hostNameBindings_gpsspoofer.azurewebsites.net_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "local",
+      "scale": null,
+      "properties": {
+        "siteName": "GpsSpoofer",
+        "domainId": null,
+        "hostNameType": "Verified"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_GpsSpoofer_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/sites/BlueForceTrackerWeb/config/web'.",
+      "type": "Microsoft.Web/sites/config",
+      "name": "[concat(parameters('sites_BlueForceTrackerWeb_name'), '/', parameters('config_web_name_1'))]",
+      "apiVersion": "2016-08-01",
+      "location": "local",
+      "tags": {
+        "hidden-related:/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/serverfarms/BlueForceTrackerWebPlan": "empty"
+      },
+      "scale": null,
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "phpVersion": "5.6",
+        "pythonVersion": "",
+        "nodeVersion": "",
+        "linuxFxVersion": "",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2012",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "[concat('$BlueForceTrackerWeb', parameters('config_web_name_1'))]",
+        "publishingPassword": null,
+        "appSettings": null,
+        "metadata": null,
+        "connectionStrings": null,
+        "machineKey": null,
+        "handlerMappings": null,
+        "documentRoot": null,
+        "scmType": "None",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": true,
+        "alwaysOn": false,
+        "javaVersion": null,
+        "javaContainer": null,
+        "javaContainerVersion": null,
+        "appCommandLine": "",
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": false,
+            "virtualDirectories": null
+          }
+        ],
+        "winAuthAdminState": 0,
+        "winAuthTenantState": 0,
+        "customAppPoolIdentityAdminState": false,
+        "customAppPoolIdentityTenantState": false,
+        "runtimeADUser": null,
+        "runtimeADUserPassword": null,
+        "loadBalancing": "LeastRequests",
+        "routingRules": [],
+        "experiments": {
+          "rampUpRules": []
+        },
+        "limits": null,
+        "autoHealEnabled": false,
+        "autoHealRules": {
+          "triggers": null,
+          "actions": null
+        },
+        "tracingOptions": null,
+        "vnetName": "",
+        "siteAuthEnabled": false,
+        "siteAuthSettings": {
+          "enabled": null,
+          "unauthenticatedClientAction": null,
+          "tokenStoreEnabled": null,
+          "allowedExternalRedirectUrls": null,
+          "defaultProvider": null,
+          "clientId": null,
+          "clientSecret": null,
+          "issuer": null,
+          "allowedAudiences": null,
+          "additionalLoginParams": null,
+          "isAadAutoProvisioned": false,
+          "googleClientId": null,
+          "googleClientSecret": null,
+          "googleOAuthScopes": null,
+          "facebookAppId": null,
+          "facebookAppSecret": null,
+          "facebookOAuthScopes": null,
+          "twitterConsumerKey": null,
+          "twitterConsumerSecret": null,
+          "microsoftAccountClientId": null,
+          "microsoftAccountClientSecret": null,
+          "microsoftAccountOAuthScopes": null
+        },
+        "cors": null,
+        "push": null,
+        "apiDefinition": null,
+        "autoSwapSlotName": null,
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": null
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_BlueForceTrackerWeb_name'))]"
+      ]
+    },
+    {
+      "comments": "Generalized from resource: '/subscriptions/14bbbdfe-3992-46e7-9a9e-65aae95e071a/resourceGroups/BlueForceTracking/providers/Microsoft.Web/sites/BlueForceTrackerWeb/hostNameBindings/blueforcetrackerweb.azurewebsites.net'.",
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "name": "[concat(parameters('sites_BlueForceTrackerWeb_name'), '/', parameters('hostNameBindings_blueforcetrackerweb.azurewebsites.net_name'))]",
+      "apiVersion": "2016-08-01",
+      "location": "local",
+      "scale": null,
+      "properties": {
+        "siteName": "BlueForceTrackerWeb",
+        "domainId": null,
+        "hostNameType": "Verified"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('sites_BlueForceTrackerWeb_name'))]"
+      ]
+    }
+  ]
+}
